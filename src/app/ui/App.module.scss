@@ -1,0 +1,25 @@
+.layout {
+  display: flex;
+  flex: 1 0 auto;
+  padding-top: 50px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.head {
+  height: auto;
+}
+
+.container {
+  flex-grow: 1;
+}
+
+.title {
+  margin: 0 0 40px;
+  color: var(--color-info-500);
+  text-align: center;
+}

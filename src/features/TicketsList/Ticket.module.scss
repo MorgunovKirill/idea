@@ -1,0 +1,30 @@
+.ticket {
+  background-color: var(--color-light-100);
+  border-radius: 10px;
+  box-shadow: 0 0 20px var(--color-light-700);
+
+  .butBtn {
+    flex-direction: column;
+    text-align: center;
+    background-color: #f86d32;
+  }
+
+  .rubleIcon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.priceBlock {
+  padding: 25px;
+  border-right: 1px solid var(--color-light-700);
+}
+
+.infoBlock {
+  padding: 25px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+}

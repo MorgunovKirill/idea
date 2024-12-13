@@ -1,0 +1,28 @@
+.label {
+  width: fit-content;
+}
+
+.heading {
+  margin: 0 0 15px;
+  text-transform: uppercase;
+}
+
+.filter {
+  padding: 20px;
+  background-color: var(--color-light-100);
+  border-radius: 10px;
+  box-shadow: 0 0 20px var(--color-light-700);
+}
+
+.currencies {
+  margin: 0 0 30px;
+}
+
+.options {
+  display: flex;
+  width: 100%;
+}
+
+.option {
+  flex-grow: 1;
+}
