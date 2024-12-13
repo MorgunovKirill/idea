@@ -1,3 +1,4 @@
+import { InfoBlock } from '@/features/TicketsList/InfoBlock'
 import { Ticket } from '@/utils/types'
 import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble'
 import Button from '@mui/material/Button'
@@ -9,8 +10,6 @@ type Props = {
   tickets: Ticket[]
 }
 export const TicketsList = ({ tickets }: Props) => {
-  console.log('tickets', tickets)
-
   return (
     <>
       {tickets.map((ticket, idx) => {
@@ -23,6 +22,7 @@ export const TicketsList = ({ tickets }: Props) => {
             spacing={3}
           >
             <Grid className={s.priceBlock} size={4}>
+              <img alt={'logo'} height={80} src={'img/ta_logo.png'} width={160} />
               <Button className={s.butBtn} variant={'contained'}>
                 <p>Купить</p>{' '}
                 <p className={s.price}>
@@ -31,7 +31,7 @@ export const TicketsList = ({ tickets }: Props) => {
               </Button>
             </Grid>
             <Grid className={s.infoBlock} size={8}>
-              Info
+              <InfoBlock ticket={ticket} />
             </Grid>
           </Grid>
         )

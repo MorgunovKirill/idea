@@ -1,0 +1,47 @@
+.move {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addresses {
+  display: flex;
+  justify-content: space-between;
+}
+
+.time {
+  font-size: 50px;
+  line-height: 1.2;
+  color: var(--color-dark-300);
+}
+
+.stops {
+  align-self: center;
+  font-size: var(--font-size-xl);
+  color: var(--color-dark-100);
+}
+
+.stopsCount {
+  margin-bottom: 5px;
+}
+
+.location {
+  font-size: var(--font-size-l);
+  color: var(--color-dark-300);
+}
+
+.date {
+  font-size: var(--font-size-l);
+  color: var(--color-dark-100);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  margin: 0 -25px 0 -15px;
+}
+
+.line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--color-dark-300);
+}
