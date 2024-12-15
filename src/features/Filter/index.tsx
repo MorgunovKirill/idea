@@ -64,15 +64,7 @@ export const Filter = ({
           <div className={s.allLabelBlock}>
             <FormControlLabel
               className={clsx(s.label, s.disabledLabel)}
-              control={
-                <Checkbox
-                  callback={() => {
-                    changeAllOptions(allOptionsPicked)
-                  }}
-                  checked={allOptionsPicked}
-                  option={'all'}
-                />
-              }
+              control={<Checkbox callback={() => {}} checked={allOptionsPicked} option={'all'} />}
               label={''}
             />
             <Button

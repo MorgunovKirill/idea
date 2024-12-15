@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Filter } from '@/features/Filter'
 import { TicketsList } from '@/features/TicketsList'
@@ -18,23 +18,24 @@ export type StopsType = {
 
 export function App() {
   const tickets: Ticket[] = ticketsData.tickets
+  const [filteredTickets, setFilteredTickets] = useState<Ticket[]>(tickets)
   const [activeCurrency, changeActiveCurrency] = useState<CurrencyType>(CurrencyType.rub)
   const [pickedStopsCount, changePickedStopsCount] = useState<Record<string, StopsType>>({
     '0': {
       label: 'Без пересадок',
-      value: false,
+      value: true,
     },
     '1': {
       label: '1 пересадка',
-      value: false,
+      value: true,
     },
     '2': {
       label: '2 пересадки',
-      value: false,
+      value: true,
     },
     '3': {
       label: '3 пересадки',
-      value: false,
+      value: true,
     },
   })
 
@@ -50,11 +51,7 @@ export function App() {
       const newState = { ...prevState }
 
       for (const key of Object.keys(newState)) {
-        if (allOptionsPicked) {
-          newState[key].value = false
-        } else {
-          newState[key].value = true
-        }
+        newState[key].value = !allOptionsPicked
       }
 
       return newState
@@ -73,6 +70,22 @@ export function App() {
     })
   }
 
+  useEffect(() => {
+    const stops: number[] = []
+
+    for (const [key, value] of Object.entries(pickedStopsCount)) {
+      if (value.value) {
+        stops.push(+key)
+      }
+    }
+
+    const filtered = [...tickets].filter(ticket => {
+      return stops.includes(ticket.stops)
+    })
+
+    setFilteredTickets(filtered)
+  }, [pickedStopsCount])
+
   return (
     <Container className={s.layout} fixed>
       <div className={s.grid}>
@@ -88,8 +101,12 @@ export function App() {
               pickedStopsCount={pickedStopsCount}
             />
           </Grid>
-          <Grid container size={8}>
-            <TicketsList activeCurrency={activeCurrency} tickets={tickets} />
+          <Grid className={s.list} container size={8}>
+            {filteredTickets ? (
+              <TicketsList activeCurrency={activeCurrency} tickets={filteredTickets} />
+            ) : (
+              <h2>No data...</h2>
+            )}
           </Grid>
         </Grid>
       </div>
