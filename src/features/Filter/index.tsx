@@ -12,6 +12,7 @@ import s from './Filter.module.scss'
 type Props = {
   activeCurrency: string
   changeActiveCurrency: (currency: CurrencyType) => void
+  changeAllStopsCountHandler: (allOptionsPicked: boolean) => void
   changePickedStopsCountHandler: (option: string, newValue: boolean) => void
   pickSpecificStopsCountHandler: (option: string) => void
   pickedStopsCount: Record<string, StopsType>
@@ -20,6 +21,7 @@ type Props = {
 export const Filter = ({
   activeCurrency,
   changeActiveCurrency,
+  changeAllStopsCountHandler,
   changePickedStopsCountHandler,
   pickSpecificStopsCountHandler,
   pickedStopsCount,
@@ -59,21 +61,29 @@ export const Filter = ({
       <div className={s.transfers}>
         <h2 className={s.heading}>Количество пересадок</h2>
         <FormGroup>
-          <FormControlLabel
-            className={s.label}
-            control={
-              <Checkbox
-                callback={() => {
-                  changeAllOptions(allOptionsPicked)
-                }}
-                checked={allOptionsPicked}
-                option={'all'}
-              />
-            }
-            label={'Все'}
-          />
+          <div className={s.allLabelBlock}>
+            <FormControlLabel
+              className={clsx(s.label, s.disabledLabel)}
+              control={
+                <Checkbox
+                  callback={() => {
+                    changeAllOptions(allOptionsPicked)
+                  }}
+                  checked={allOptionsPicked}
+                  option={'all'}
+                />
+              }
+              label={''}
+            />
+            <Button
+              className={s.allBtn}
+              onClick={() => changeAllStopsCountHandler(allOptionsPicked)}
+            >
+              Все
+            </Button>
+          </div>
           {Object.entries(pickedStopsCount).map(([key, value]) => (
-            <div className={s.labelBlock}>
+            <div className={s.labelBlock} key={key}>
               <FormControlLabel
                 className={s.label}
                 control={
@@ -83,7 +93,6 @@ export const Filter = ({
                     option={key}
                   />
                 }
-                key={key}
                 label={value.label}
               />
               <Button onClick={() => pickSpecificStopsCountHandler(key)}>Только</Button>

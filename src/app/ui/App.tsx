@@ -45,12 +45,21 @@ export function App() {
     }))
   }
 
-  // const changeAllStopsCountHandler = () => {
-  //   changePickedStopsCount(prevState => ({
-  //     ...prevState,
-  //     [option]: { ...prevState[option], value: newValue },
-  //   }))
-  // }
+  const changeAllStopsCountHandler = (allOptionsPicked: boolean) => {
+    changePickedStopsCount(prevState => {
+      const newState = { ...prevState }
+
+      for (const key of Object.keys(newState)) {
+        if (allOptionsPicked) {
+          newState[key].value = false
+        } else {
+          newState[key].value = true
+        }
+      }
+
+      return newState
+    })
+  }
 
   const pickSpecificStopsCountHandler = (option: string) => {
     changePickedStopsCount(prevState => {
@@ -73,6 +82,7 @@ export function App() {
             <Filter
               activeCurrency={activeCurrency}
               changeActiveCurrency={changeActiveCurrency}
+              changeAllStopsCountHandler={changeAllStopsCountHandler}
               changePickedStopsCountHandler={changePickedStopsCountHandler}
               pickSpecificStopsCountHandler={pickSpecificStopsCountHandler}
               pickedStopsCount={pickedStopsCount}
