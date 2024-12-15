@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react'
+import { ChangeEvent } from 'react'
 
 import CheckboxMUI from '@mui/material/Checkbox'
 
@@ -7,7 +7,7 @@ type CheckboxProps = {
   checked: boolean
 }
 
-export const Checkbox: FC<CheckboxProps> = ({ callback, checked }) => {
+export const Checkbox = ({ callback, checked }: CheckboxProps) => {
   const changeHandler = (evt: ChangeEvent<HTMLInputElement>) => {
     callback(evt.currentTarget.checked)
   }

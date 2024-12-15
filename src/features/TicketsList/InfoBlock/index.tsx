@@ -9,8 +9,6 @@ type Props = {
   ticket: Ticket
 }
 export const InfoBlock = ({ ticket }: Props) => {
-  console.log('ticket', ticket)
-
   return (
     <>
       <div className={s.move}>
@@ -27,12 +25,12 @@ export const InfoBlock = ({ ticket }: Props) => {
       <div className={s.addresses}>
         <div>
           <div className={s.location}>{`${ticket.origin_name}, ${ticket.origin}`}</div>
-          <div className={s.date}>{convertDate.toLocaleString(ticket.departure_date)}</div>
+          <div className={s.date}>{convertDate.parseDate(ticket.departure_date)}</div>
         </div>
 
         <div>
           <div className={s.location}>{`${ticket.destination_name}, ${ticket.destination}`}</div>
-          <div className={s.date}>{convertDate.toLocaleString(ticket.arrival_date)}</div>
+          <div className={s.date}>{convertDate.parseDate(ticket.arrival_date)}</div>
         </div>
       </div>
     </>

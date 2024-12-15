@@ -1,15 +1,18 @@
+import { CurrencyRenderer } from '@/features/TicketsList/CurrencyRenderer'
 import { InfoBlock } from '@/features/TicketsList/InfoBlock'
 import { Ticket } from '@/utils/types'
-import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble'
+import { CurrencyType, convertCurrency } from '@/utils/utils'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid2'
 
 import s from './Ticket.module.scss'
 
 type Props = {
+  activeCurrency: CurrencyType
   tickets: Ticket[]
 }
-export const TicketsList = ({ tickets }: Props) => {
+
+export const TicketsList = ({ activeCurrency, tickets }: Props) => {
   return (
     <>
       {tickets.map((ticket, idx) => {
@@ -22,11 +25,16 @@ export const TicketsList = ({ tickets }: Props) => {
             spacing={3}
           >
             <Grid className={s.priceBlock} size={4}>
-              <img alt={'logo'} height={80} src={'img/ta_logo.png'} width={160} />
+              <div className={s.logoBlock}>
+                <img alt={'logo'} src={`img/${ticket.carrier.toLowerCase()}_logo.png`} />
+              </div>
               <Button className={s.butBtn} variant={'contained'}>
                 <p>Купить</p>{' '}
                 <p className={s.price}>
-                  за {ticket.price} <CurrencyRubleIcon className={s.rubleIcon} />
+                  за {convertCurrency(ticket.price, activeCurrency)}
+                  <span className={s.currencyIcon}>
+                    <CurrencyRenderer type={activeCurrency} />
+                  </span>
                 </p>
               </Button>
             </Grid>
