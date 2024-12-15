@@ -29,7 +29,7 @@ export const TicketsList = ({ activeCurrency, tickets }: Props) => {
                 <img alt={'logo'} src={`img/${ticket.carrier.toLowerCase()}_logo.png`} />
               </div>
               <Button className={s.butBtn} variant={'contained'}>
-                <p>Купить</p>{' '}
+                <p>Купить</p>
                 <p className={s.price}>
                   за {convertCurrency(ticket.price, activeCurrency)}
                   <span className={s.currencyIcon}>

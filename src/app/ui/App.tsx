@@ -102,10 +102,10 @@ export function App() {
             />
           </Grid>
           <Grid className={s.list} container size={8}>
-            {filteredTickets ? (
+            {filteredTickets.length ? (
               <TicketsList activeCurrency={activeCurrency} tickets={filteredTickets} />
             ) : (
-              <h2>No data...</h2>
+              <h2>Попробуйте поменять условия поиска...</h2>
             )}
           </Grid>
         </Grid>

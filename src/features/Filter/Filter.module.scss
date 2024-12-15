@@ -13,6 +13,8 @@
   }
 
   .allBtn {
+    position: relative;
+
     justify-content: flex-start;
 
     margin: 0;
@@ -25,6 +27,16 @@
     color: var(--color-dark-900);
     text-align: start;
     text-transform: none;
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      left: -50%;
+
+      width: 50%;
+      height: 100%;
+    }
   }
 }
 
