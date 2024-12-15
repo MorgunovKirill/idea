@@ -1,3 +1,4 @@
+import { StopsType } from '@/app/ui/App'
 import { Checkbox } from '@/components/ui'
 import { CurrencyType } from '@/utils/utils'
 import Button from '@mui/material/Button'
@@ -11,10 +12,21 @@ import s from './Filter.module.scss'
 type Props = {
   activeCurrency: string
   changeActiveCurrency: (currency: CurrencyType) => void
+  changePickedStopsCountHandler: (option: string, newValue: boolean) => void
+  pickSpecificStopsCountHandler: (option: string) => void
+  pickedStopsCount: Record<string, StopsType>
 }
 
-export const Filter = ({ activeCurrency, changeActiveCurrency }: Props) => {
-  const transfersChangeHandler = () => {}
+export const Filter = ({
+  activeCurrency,
+  changeActiveCurrency,
+  changePickedStopsCountHandler,
+  pickSpecificStopsCountHandler,
+  pickedStopsCount,
+}: Props) => {
+  const allOptionsPicked = Object.values(pickedStopsCount).every(item => {
+    return item.value
+  })
 
   return (
     <div className={s.filter}>
@@ -49,29 +61,34 @@ export const Filter = ({ activeCurrency, changeActiveCurrency }: Props) => {
         <FormGroup>
           <FormControlLabel
             className={s.label}
-            control={<Checkbox callback={transfersChangeHandler} checked={false} />}
+            control={
+              <Checkbox
+                callback={() => {
+                  changeAllOptions(allOptionsPicked)
+                }}
+                checked={allOptionsPicked}
+                option={'all'}
+              />
+            }
             label={'Все'}
           />
-          <FormControlLabel
-            className={s.label}
-            control={<Checkbox callback={transfersChangeHandler} checked={false} />}
-            label={'Без пересадок'}
-          />
-          <FormControlLabel
-            className={s.label}
-            control={<Checkbox callback={transfersChangeHandler} checked />}
-            label={'1 пересадка'}
-          />
-          <FormControlLabel
-            className={s.label}
-            control={<Checkbox callback={transfersChangeHandler} checked={false} />}
-            label={'2 пересадки'}
-          />
-          <FormControlLabel
-            className={s.label}
-            control={<Checkbox callback={transfersChangeHandler} checked={false} />}
-            label={'3 пересадки'}
-          />
+          {Object.entries(pickedStopsCount).map(([key, value]) => (
+            <div className={s.labelBlock}>
+              <FormControlLabel
+                className={s.label}
+                control={
+                  <Checkbox
+                    callback={changePickedStopsCountHandler}
+                    checked={value.value}
+                    option={key}
+                  />
+                }
+                key={key}
+                label={value.label}
+              />
+              <Button onClick={() => pickSpecificStopsCountHandler(key)}>Только</Button>
+            </div>
+          ))}
         </FormGroup>
       </div>
     </div>

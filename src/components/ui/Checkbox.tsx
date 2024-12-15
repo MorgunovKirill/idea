@@ -3,13 +3,14 @@ import { ChangeEvent } from 'react'
 import CheckboxMUI from '@mui/material/Checkbox'
 
 type CheckboxProps = {
-  callback: (checked: boolean) => void
+  callback: (option: string, checked: boolean) => void
   checked: boolean
+  option: string
 }
 
-export const Checkbox = ({ callback, checked }: CheckboxProps) => {
+export const Checkbox = ({ callback, checked, option }: CheckboxProps) => {
   const changeHandler = (evt: ChangeEvent<HTMLInputElement>) => {
-    callback(evt.currentTarget.checked)
+    callback(option, evt.currentTarget.checked)
   }
 
   return <CheckboxMUI checked={checked} onChange={changeHandler} />
